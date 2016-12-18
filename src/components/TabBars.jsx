@@ -2,16 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Tabbar, Tab, Page } from 'react-onsenui';
 import JobPage from '../pages/JobPage';
+import SchedulePage from '../pages/SchedulePage';
 import InvoicePage from '../pages/InvoicePage';
 import SettingsPage from '../pages/SettingsPage';
-
+import moment from 'moment';
 export default class TabBars extends React.Component {
     renderTabs() {
         const sections = [
+            
+            {
+                key: 'Schedule',
+                component: (<SchedulePage key='Schedule' title='Schedule' navigator={this.props.navigator} />),
+                icon: 'md-calendar-note'
+            },
             {
                 key: 'Jobs',
                 component: (<JobPage key='Jobs' title='Jobs' navigator={this.props.navigator} />),
-                icon: 'md-calendar'
+                icon: 'md-file-text'
             },
             {
                 key: 'Invoices',

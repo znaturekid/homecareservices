@@ -1,11 +1,12 @@
 import request from 'libs/Request';
 import * as types from 'types';
 import Promise from 'promise';
+import _ from 'lodash';
 
 export function fetchjob(id) {
     return {
         type: types.GET_JOB,
-        promise: request('get', 'Tickets/detail', id)
+        promise: request('get', 'Ticket', id)
     };
 }
 export function fetchjobs(id) {
@@ -37,21 +38,21 @@ export function fetchjobSuccess(data) {
 export function createjob(job) {
     return {
         type: types.CREATE_JOB,
-        promise: request('post', null, job)
+        promise: request('post', 'Tickets')
     };
 }
 
 export function updatejob(job) {
     return {
         type: types.UPDATE_JOB,
-        promise: request('put', job._id, job, '/api/job')
+        promise: request('post','Ticket', job.TicketId, _.omit(job, ['TicketItems', 'Appointments', 'TicketLogs', 'Customer']))
     };
 }
 
 export function deletejob(job) {
     return {
         type: types.DELETE_JOB,
-        promise: request('delete', job._id, job, '/api/job')
+        promise: request('delete','Ticket', job.TicketId, job)
     };
 }
 export function deletejobSuccess(job) {

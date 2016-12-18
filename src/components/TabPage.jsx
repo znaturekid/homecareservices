@@ -4,10 +4,12 @@ import {Page, Toolbar} from 'react-onsenui';
 import NavToolBar from './NavToolBar';
 export default class JobPage extends React.Component {
   render() {
-    const {navigator, title, children, backButton} = this.props;
+    const {navigator, title, children, backButton, renderFixed} = this.props;
+
     return (
       <Page
-        renderToolbar={() => <NavToolBar title={title} navigator={navigator} backButton={backButton} />}>
+        renderToolbar={() => <NavToolBar title={title} navigator={navigator} backButton={backButton} />}
+        >
         {children}
       </Page>
     )

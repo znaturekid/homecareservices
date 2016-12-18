@@ -3,12 +3,15 @@ import { connect } from 'react-redux';
 import {List , ListItem} from 'react-onsenui';
 import JobListItem from '../components/JobListItem';
 import JobDetailView from './JobDetailView';
-import { fetchjob, fetchjobSuccess } from '../actions/job';
+import { fetchjob, fetchjobSuccess, fetchjobs } from '../actions/job';
 class JobList extends Component {
     constructor(props) {
         super(props);
         this.renderRow = this.renderRow.bind(this);
         this.onRowTap = this.onRowTap.bind(this);
+    }
+    componentDidMount() {
+        this.props.getAllJob(-1);
     }
     onRowTap(detail) {
         const {navigator, getJob, getJobDetail} = this.props;
@@ -24,23 +27,25 @@ class JobList extends Component {
             )
     }
     render() {
-        const {jobs} = this.props;
+        const {customers} = this.props;
         
         return (
-            <List dataSource={jobs} 
+            <List dataSource={customers} 
                 renderRow={this.renderRow} />
         );
     }
 };
 const mapStateToProps = (state) => {
     return {
-        jobs: state.job.list
+        customers: state.job.list
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
         getJobDetail: (detail) => dispatch(fetchjobSuccess(detail)),
-        getJob: fetchjob
+        getJob: fetchjob,
+        getAllJob: (id) => dispatch(fetchjobs(id))
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(JobList);
